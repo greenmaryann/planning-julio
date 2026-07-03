@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20width%3D%2264%22%20height%3D%2264%22%20viewBox%3D%220%200%2064%2064%22%20fill%3D%22none%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%0A%3Cpath%20d%3D%22M45.5986%203.5498C47.2448%201.9251%2051.9504%204.02357%2056.1094%208.2373C60.2684%2012.4511%2062.3053%2017.1848%2060.6592%2018.8096C59.8236%2019.6338%2058.2008%2019.4975%2056.2608%2018.6143C60.2926%2024.4164%2061.7407%2029.8315%2059.4424%2032.1006C57.6519%2033.8678%2053.9834%2033.335%2049.7315%2031.0732C58.3808%2042.5359%2061.8673%2053.4488%2057.5264%2057.7334C53.1202%2062.0823%2041.9911%2058.2782%2030.459%2049.1904C33.1321%2053.9066%2033.8478%2058.0387%2031.9151%2059.9463C29.6582%2062.1729%2024.4187%2060.7488%2018.7891%2056.8105C19.345%2058.4034%2019.329%2059.7054%2018.6104%2060.415C16.9642%2062.0398%2012.2577%2059.9414%208.09865%2055.7275C3.93974%2051.5137%201.90272%2046.78%203.54885%2045.1553C4.27734%2044.4364%205.60544%2044.4469%207.21974%2045.0469C3.42673%2039.4185%202.11219%2034.2269%204.3506%2032.0176C6.25468%2030.1383%2010.2824%2030.8587%2014.877%2033.4951C5.70741%2021.6955%201.90942%2010.3011%206.36818%205.90039C10.6944%201.63105%2021.5001%205.22068%2032.8057%2013.9531C30.5746%209.64756%2030.0785%205.94694%2031.877%204.17187C34.2212%201.8587%2039.7849%203.48438%2045.6602%207.77637C44.8713%205.90241%2044.7882%204.34974%2045.5986%203.5498Z%22%20fill%3D%22%231F1F1F%22/%3E%0A%3C/svg%3E">
+<title>Planificación Julio</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap');
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  :root{
+    --teal:#1F1F1F;--tealL:#F2F2F2;--tealD:#1F1F1F;--tealM:#C9C9C9;
+    --purple:#4A4A4A;--purpleL:#F4F4F4;--purpleD:#333333;
+    --coral:#6B6B6B;--coralL:#F4F4F4;--coralD:#3D3D3D;
+    --amber:#8A8A8A;--amberL:#F4F4F4;--amberD:#474747;
+    --olive:#5C5C5C;--oliveL:#F4F4F4;--oliveD:#3A3A3A;
+    --gray:#8C8C8C;--grayL:#F1F1F1;--dark:#1F1F1F;--mid:#5E5E5E;
+    --light:#B3B3B3;--bg:#FAFAFA;--white:#FFFFFF;--border:#E4E4E4;
+  }
+  .prio-dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:7px;vertical-align:baseline;}
+  body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--dark);min-height:100vh;padding:48px 40px 80px;}
+
+  .header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:48px;padding-bottom:24px;border-bottom:1px solid var(--border);}
+  .header h1{font-size:24px;font-weight:500;letter-spacing:-0.4px;}
+  .header h1 span{color:var(--teal);}
+  .header p{margin-top:6px;font-size:13px;color:var(--gray);font-weight:300;}
+  .badge{font-size:11px;font-weight:500;color:var(--mid);background:var(--white);border:1px solid var(--border);padding:5px 12px;border-radius:20px;}
+
+  /* MONTH GOAL BANNER */
+  .month-goal{padding:20px 24px;background:var(--tealL);border:1px solid var(--tealM);border-radius:16px;margin-bottom:40px;display:flex;align-items:center;gap:16px;}
+  .month-goal-label{font-size:11px;font-weight:500;color:var(--tealD);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px;}
+  .month-goal-text{font-size:16px;font-weight:500;color:var(--tealD);line-height:1.4;}
+  .month-goal-icon{font-size:28px;flex-shrink:0;}
+
+  /* WEEKS GRID */
+  .weeks{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:20px;margin-bottom:40px;}
+
+  .week{background:var(--white);border:1px solid var(--border);border-radius:20px;overflow:hidden;}
+  .week-header{padding:18px 20px 16px;border-bottom:1px solid var(--border);}
+  .week-num{font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px;}
+  .week-dates{font-size:12px;color:var(--gray);font-weight:300;margin-bottom:10px;}
+  .week-title{font-size:16px;font-weight:500;}
+  .week-objective{font-size:12px;color:var(--gray);font-weight:300;margin-top:4px;line-height:1.5;}
+  .week-body{padding:16px 20px 20px;}
+
+  .item{display:flex;gap:10px;align-items:flex-start;margin-bottom:12px;}
+  .item:last-child{margin-bottom:0;}
+  .item-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;margin-top:5px;}
+  .item-content{}
+  .item-label{font-size:13px;font-weight:500;color:var(--dark);line-height:1.4;}
+  .item-sub{font-size:12px;color:var(--gray);font-weight:300;margin-top:2px;line-height:1.5;}
+
+  .weekly-badge{display:inline-flex;align-items:center;gap:5px;margin-top:10px;padding:5px 12px;border-radius:20px;font-size:11px;font-weight:500;}
+
+  /* WEEK COLORS */
+  .week-1 .week-num{color:var(--teal);}
+  .week-1 .week-header{border-left:3px solid var(--teal);}
+  .week-1 .item-dot{background:var(--teal);}
+  .week-1 .weekly-badge{background:var(--tealL);color:var(--tealD);}
+
+  .week-2 .week-num{color:var(--purple);}
+  .week-2 .week-header{border-left:3px solid var(--purple);}
+  .week-2 .item-dot{background:var(--purple);}
+  .week-2 .weekly-badge{background:var(--purpleL);color:var(--purpleD);}
+
+  .week-3 .week-num{color:var(--coral);}
+  .week-3 .week-header{border-left:3px solid var(--coral);}
+  .week-3 .item-dot{background:var(--coral);}
+  .week-3 .weekly-badge{background:var(--coralL);color:var(--coralD);}
+
+  .week-4 .week-num{color:var(--amber);}
+  .week-4 .week-header{border-left:3px solid var(--amber);}
+  .week-4 .item-dot{background:var(--amber);}
+  .week-4 .weekly-badge{background:var(--amberL);color:var(--amberD);}
+
+  .week-5 .week-num{color:var(--olive);}
+  .week-5 .week-header{border-left:3px solid var(--olive);}
+  .week-5 .item-dot{background:var(--olive);}
+  .week-5 .weekly-badge{background:var(--oliveL);color:var(--oliveD);}
+
+  /* DEFINITIONS SECTION */
+  .section-title{font-size:18px;font-weight:500;margin-bottom:20px;letter-spacing:-0.2px;}
+  .section-title span{color:var(--teal);}
+
+  .defs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin-bottom:48px;}
+  .def-group{background:var(--white);border:1px solid var(--border);border-radius:16px;padding:18px 20px;}
+  .def-group-label{font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.06em;margin-bottom:14px;}
+  .def-item{display:flex;align-items:flex-start;gap:8px;margin-bottom:10px;}
+  .def-item:last-child{margin-bottom:0;}
+  .def-check{width:16px;height:16px;border:1.5px solid var(--border);border-radius:3px;background:var(--white);cursor:pointer;flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;transition:all 0.2s;}
+  .def-check:hover{border-color:var(--teal);}
+  .def-check.done{background:var(--teal);border-color:var(--teal);}
+  .def-check.done::after{content:'✓';color:white;font-size:9px;font-weight:700;}
+  .def-text{font-size:12px;color:var(--dark);line-height:1.5;}
+  .def-sub{font-size:11px;color:var(--gray);font-weight:300;margin-top:1px;}
+
+  .urgent .def-group-label{color:var(--coral);}
+  .urgent{border-left:3px solid var(--coral);}
+  .important .def-group-label{color:var(--amber);}
+  .important{border-left:3px solid var(--amber);}
+  .later .def-group-label{color:var(--gray);}
+  .later{border-left:3px solid var(--border);}
+
+  /* TEAM SECTION */
+  .team-grid{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:48px;}
+  .team-card{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:14px 18px;flex:1;min-width:180px;}
+  .team-name{font-size:13px;font-weight:500;color:var(--dark);margin-bottom:4px;}
+  .team-role{font-size:11px;font-weight:500;color:var(--teal);margin-bottom:8px;}
+  .team-items{display:flex;flex-direction:column;gap:4px;}
+  .team-item{font-size:11px;color:var(--gray);font-weight:300;line-height:1.4;}
+  .team-item::before{content:"· ";color:var(--light);}
+
+  /* RITMO SECTION */
+  .ritmo-grid{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:48px;}
+  .ritmo-card{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:14px 18px;flex:1;min-width:160px;}
+  .ritmo-day{font-size:13px;font-weight:500;color:var(--dark);margin-bottom:2px;}
+  .ritmo-who{font-size:11px;font-weight:500;color:var(--purple);margin-bottom:6px;}
+  .ritmo-desc{font-size:11px;color:var(--gray);font-weight:300;line-height:1.5;}
+
+  /* FOOTER */
+  .footer{margin-top:48px;padding-top:20px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;}
+  .footer p{font-size:11px;color:var(--light);font-weight:300;}
+  .footer strong{color:var(--mid);font-weight:500;}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div>
+    <h1><span>Planificación Julio 2026</span></h1>
+    <p>Smart PFM</p>
+  </div>
+  <span class="badge">Head of Product · Mary Ann</span>
+</div>
+
+<div class="month-goal">
+  <div>
+    <div class="month-goal-label">Objetivo del mes</div>
+    <div class="month-goal-text">Definiciones cerradas + primera pantalla real funcionando en el dispositivo</div>
+  </div>
+</div>
+
+<!-- WEEKS -->
+<div class="weeks">
+
+  <div class="week week-1">
+    <div class="week-header">
+      <div class="week-num">Semana 1</div>
+      <div class="week-dates">30 jun – 6 jul</div>
+      <div class="week-title">Arrancar alineados</div>
+      <div class="week-objective">Que todos tengan el mismo norte antes de que empiece la ejecución</div>
+    </div>
+    <div class="week-body">
+      <div class="item">
+        <div class="item-dot"></div>
+        <div class="item-content">
+          <div class="item-label">Forma de trabajar documentada</div>
+          <div class="item-sub">Slack / Notion / Asana · ritmo de reuniones · weekly</div>
+        </div>
+      </div>
+      <div class="item">
+        <div class="item-dot"></div>
+        <div class="item-content">
+          <div class="item-label">Planificación de Julio compartida</div>
+          <div class="item-sub">Este documento</div>
+        </div>
+      </div>
+      <div class="item">
+        <div class="item-dot"></div>
+        <div class="item-content">
+          <div class="item-label">Lista de definiciones pendientes</div>
+          <div class="item-sub">Qué hay que resolver, en qué orden, y quién desbloquea cada cosa</div>
+        </div>
+      </div>
+      <div class="item">
+        <div class="item-dot"></div>
+        <div class="item-content">
+          <div class="item-label">Mapa del producto</div>
+          <div class="item-sub">Un visual de la app accesible para todo el equipo — flujos + arquitectura</div>
+        </div>
+      </div>
+      <span class="weekly-badge">Weekly miérc. 9 — presentar todo esto</span>
+    </div>
+  </div>
+
+  <div class="week week-2">
+    <div class="week-header">
+      <div class="week-num">Semana 2</div>
+      <div class="week-dates">7 – 13 jul</div>
+      <div class="week-title">Cerrar definiciones</div>
+      
+    </div>
+    <div class="week-body">
+      <div class="item">
+        <div class="item-dot"></div>
+        <div class="item-content">
+          <div class="item-label">Features MVP día 1 — cerrados</div>
+          <div class="item-sub">Qué entra y qué no, acordado con Ale. Mary propone, equipo alinea.</div>
+        </div>
+      </div>
+      <div class="item">
+        <div class="item-dot"></div>
+        <div class="item-content">
+          <div class="item-label">Identidad base de Nora</div>
+          <div class="item-sub">Paleta, tipografía, personaje, voz — suficiente para que Enoc tenga tokens reales</div>
+        </div>
+      </div>
+      <div class="item">
+        <div class="item-dot"></div>
+        <div class="item-content">
+          <div class="item-label">Qué medir desde el día uno</div>
+          <div class="item-sub">3–5 métricas clave para el primer release · herramienta de analytics a definir</div>
+        </div>
+      </div>
+      <span class="weekly-badge">Weekly miérc. 9 — proponer las tres, alinear con equipo</span>
+    </div>
+  </div>
+
+  <div class="week week-3">
+    <div class="week-header">
+      <div class="week-num">Semana 3</div>
+      <div class="week-dates">14 – 20 jul</div>
+      <div class="week-title">Enoc construye, Mary diseña</div>
+      <div class="week-objective">Ejecución en paralelo — diseño y desarrollo avanzando al mismo tiempo</div>
+    </div>
+    <div class="week-body">
+      <div class="item">
+        <div class="item-dot"></div>
+        <div class="item-content">
+          <div class="item-label">Enoc — ambiente + core técnico</div>
+          <div class="item-sub">Navegación base, estructura de pantallas, WhatsApp bot</div>
+        </div>
+      </div>
+      <div class="item">
+        <div class="item-dot"></div>
+        <div class="item-content">
+          <div class="item-label">Mary — DS componentes prioritarios</div>
+          <div class="item-sub">Balance card · transaction row · FAB · bottom nav · amount input</div>
+        </div>
+      </div>
+      <div class="item">
+        <div class="item-dot"></div>
+        <div class="item-content">
+          <div class="item-label">Coordinación diaria Mary + Enoc</div>
+          <div class="item-sub">Lun / mié / vie — que el diseño no bloquee al desarrollo ni viceversa</div>
+        </div>
+      </div>
+      <span class="weekly-badge">Weekly miérc. 16 — update de avance, desbloquear trabas</span>
+    </div>
+  </div>
+
+  <div class="week week-4">
+    <div class="week-header">
+      <div class="week-num">Semana 4</div>
+      <div class="week-dates">21 – 27 jul</div>
+      <div class="week-title">Primer flujo real</div>
+      <div class="week-objective">Social login + Home + registro básico funcionando en el dispositivo — el primer hito tangible</div>
+    </div>
+    <div class="week-body">
+      <div class="item">
+        <div class="item-dot"></div>
+        <div class="item-content">
+          <div class="item-label">Home funcionando</div>
+          <div class="item-sub">Balance, lista de movimientos, FAB visible — aunque sea con datos mockeados</div>
+        </div>
+      </div>
+      <div class="item">
+        <div class="item-dot"></div>
+        <div class="item-content">
+          <div class="item-label">Registro de gasto básico</div>
+          <div class="item-sub">Todas las modalidades: texto libre, voz, foto, WhatsApp, import PDF · Un flujo completo end to end</div>
+        </div>
+      </div>
+      <div class="item">
+        <div class="item-dot"></div>
+        <div class="item-content">
+          <div class="item-label">Revisión con Ale</div>
+          <div class="item-sub">Mostrar el primer build — no tiene que ser bonito, tiene que existir</div>
+        </div>
+      </div>
+      <span class="weekly-badge">Weekly miérc. 23 — demo del primer flujo real</span>
+    </div>
+  </div>
+
+  <div class="week week-5">
+    <div class="week-header">
+      <div class="week-num">Cierre de mes</div>
+      <div class="week-dates">28 – 31 jul</div>
+      <div class="week-title">Retro y ajuste</div>
+      <div class="week-objective">Aprender del mes y preparar agosto con lo que funcionó y lo que no</div>
+    </div>
+    <div class="week-body">
+      <div class="item">
+        <div class="item-dot"></div>
+        <div class="item-content">
+          <div class="item-label">Retrospectiva Mary + Enoc</div>
+          <div class="item-sub">Qué funcionó del proceso, qué cambiar — máx. 1 hora</div>
+        </div>
+      </div>
+      <div class="item">
+        <div class="item-dot"></div>
+        <div class="item-content">
+          <div class="item-label">Planificación de agosto</div>
+          <div class="item-sub">Qué sigue después del primer build — qué features entran, qué se ajusta</div>
+        </div>
+      </div>
+      <div class="item">
+        <div class="item-dot"></div>
+        <div class="item-content">
+          <div class="item-label">Update a Ale</div>
+          <div class="item-sub">Estado del mes, decisiones tomadas, hitos alcanzados, plan de agosto</div>
+        </div>
+      </div>
+      <span class="weekly-badge">Weekly miérc. 30 — cierre de mes</span>
+    </div>
+  </div>
+
+</div>
+
+<!-- DEFINICIONES PENDIENTES -->
+<div class="section-title">Lista de <span>definiciones pendientes</span></div>
+<div class="defs-grid">
+
+  <div class="def-group urgent">
+    <div class="def-group-label"><span class="prio-dot" style="background:#1F1F1F"></span>Urgente — bloquea a Enoc</div>
+    <div class="def-item">
+      <div class="def-check" onclick="this.classList.toggle('done')"></div>
+      <div>
+        <div class="def-text">Features MVP día 1 cerrados</div>
+        <div class="def-sub">Qué entra y qué no — acordado con Ale</div>
+      </div>
+    </div>
+    <div class="def-item">
+      <div class="def-check" onclick="this.classList.toggle('done')"></div>
+      <div>
+        <div class="def-text">Tokens de DS entregados a Enoc</div>
+        <div class="def-sub">Colores, tipografía, radios, espaciado</div>
+      </div>
+    </div>
+    <div class="def-item">
+      <div class="def-check" onclick="this.classList.toggle('done')"></div>
+      <div>
+        <div class="def-text">Stack y repo configurado</div>
+        <div class="def-sub">Enoc — Expo / React Native, estructura del proyecto</div>
+      </div>
+    </div>
+    <div class="def-item">
+      <div class="def-check" onclick="this.classList.toggle('done')"></div>
+      <div>
+        <div class="def-text">Accesos de Fede coordinados</div>
+        <div class="def-sub">Base de datos, backend MF, lo que necesite Enoc</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="def-group important">
+    <div class="def-group-label"><span class="prio-dot" style="background:#8C8C8C"></span>Importante — antes de fin de julio</div>
+    <div class="def-item">
+      <div class="def-check" onclick="this.classList.toggle('done')"></div>
+      <div>
+        <div class="def-text">Nombre final validado con Sabri</div>
+        <div class="def-sub">Nora — pendiente confirmación</div>
+      </div>
+    </div>
+    <div class="def-item">
+      <div class="def-check" onclick="this.classList.toggle('done')"></div>
+      <div>
+        <div class="def-text">Métricas del primer release</div>
+        <div class="def-sub">3–5 KPIs + herramienta de analytics</div>
+      </div>
+    </div>
+    <div class="def-item">
+      <div class="def-check" onclick="this.classList.toggle('done')"></div>
+      <div>
+        <div class="def-text">Identidad base cerrada</div>
+        <div class="def-sub">Paleta · tipografía · personaje · voz de Nora</div>
+      </div>
+    </div>
+    <div class="def-item">
+      <div class="def-check" onclick="this.classList.toggle('done')"></div>
+      <div>
+        <div class="def-text">Notion interno Mary + Enoc</div>
+        <div class="def-sub">Estructura de trabajo compartida entre los dos</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="def-group later">
+    <div class="def-group-label"><span class="prio-dot" style="background:#FFFFFF;border:1.5px solid #B3B3B3"></span>Next steps</div>
+    <div class="def-item">
+      <div class="def-check" onclick="this.classList.toggle('done')"></div>
+      <div>
+        <div class="def-text">Modelo de monetización detallado</div>
+        <div class="def-sub">Cuándo y cómo se monetiza — freemium, premium, etc.</div>
+      </div>
+    </div>
+    <div class="def-item">
+      <div class="def-check" onclick="this.classList.toggle('done')"></div>
+      <div>
+        <div class="def-text">Plan de lanzamiento y comunicación</div>
+        <div class="def-sub">Cómo se anuncia, quién comunica, qué canales</div>
+      </div>
+    </div>
+    <div class="def-item">
+      <div class="def-check" onclick="this.classList.toggle('done')"></div>
+      <div>
+        <div class="def-text">Producto de inversiones</div>
+        <div class="def-sub">Espera resolución legal — retomar cuando haya info</div>
+      </div>
+    </div>
+    <div class="def-item">
+      <div class="def-check" onclick="this.classList.toggle('done')"></div>
+      <div>
+        <div class="def-text">Plan de testing con usuarias</div>
+        <div class="def-sub">Cómo y cuándo hacemos el primer test real</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- EQUIPO -->
+<div class="section-title">El <span>equipo</span></div>
+<div class="team-grid">
+  <div class="team-card">
+    <div class="team-name">Mary Ann</div>
+    <div class="team-role">Head of Product</div>
+    <div class="team-items">
+      <div class="team-item">Estrategia y priorización de producto</div>
+      <div class="team-item">Diseño de experiencia y UI</div>
+      <div class="team-item">Identidad y Design System</div>
+      <div class="team-item">Coordinación del equipo</div>
+    </div>
+  </div>
+  <div class="team-card">
+    <div class="team-name">Enoc</div>
+    <div class="team-role">CTO · Tech Lead</div>
+    <div class="team-items">
+      <div class="team-item">Arquitectura técnica (Expo / RN)</div>
+      <div class="team-item">Desarrollo del PFM</div>
+      <div class="team-item">WhatsApp bot</div>
+      <div class="team-item">Backend e integraciones</div>
+    </div>
+  </div>
+  <div class="team-card">
+    <div class="team-name">Ale & Sabri</div>
+    <div class="team-role">Stakeholders · Decisiones de negocio</div>
+    <div class="team-items">
+      <div class="team-item">Definiciones de alto nivel</div>
+      <div class="team-item">Nexo con Sabri durante licencia</div>
+      <div class="team-item">Validación de hitos clave</div>
+    </div>
+  </div>
+  <div class="team-card">
+    <div class="team-name">Fede</div>
+    <div class="team-role">Nexo técnico MF</div>
+    <div class="team-items">
+      <div class="team-item">Acceso a base de datos y backend MF</div>
+      <div class="team-item">Consultas técnicas sobre app actual</div>
+      <div class="team-item">Coordinación espontánea</div>
+    </div>
+  </div>
+</div>
+
+<!-- RITMO DE TRABAJO -->
+<div class="section-title">Ritmo de <span>trabajo</span></div>
+<div class="ritmo-grid">
+  <div class="ritmo-card">
+    <div class="ritmo-day">Lunes</div>
+    <div class="ritmo-who">Mary + Enoc</div>
+    <div class="ritmo-desc">Arranque de semana — qué hace cada uno, qué se necesita del otro</div>
+  </div>
+  <div class="ritmo-card">
+    <div class="ritmo-day">Miércoles</div>
+    <div class="ritmo-who">Todo el equipo</div>
+    <div class="ritmo-desc">Weekly — estado, decisiones pendientes, foco de la semana</div>
+  </div>
+  <div class="ritmo-card">
+    <div class="ritmo-day">Viernes</div>
+    <div class="ritmo-who">Mary + Enoc</div>
+    <div class="ritmo-desc">Cierre de semana — qué se hizo, qué quedó, qué entra la próxima</div>
+  </div>
+  <div class="ritmo-card">
+    <div class="ritmo-day">Espontáneo</div>
+    <div class="ritmo-who">Mary + Enoc + Fede</div>
+    <div class="ritmo-desc">Accesos, consultas técnicas, coordinación según necesidad</div>
+  </div>
+  <div class="ritmo-card">
+    <div class="ritmo-day">Comunicación</div>
+    <div class="ritmo-who">Todo el equipo</div>
+    <div class="ritmo-desc">Slack para el día a día · Notion interno Mary + Enoc · Asana para tracking general</div>
+  </div>
+</div>
+
+<div class="footer">
+  <p><strong>Planificación Julio 2026</strong></p>
+  <p>Mary Ann Villalobos + Enoc Montiel</p>
+</div>
+
+</body>
+</html>
